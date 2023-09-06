@@ -23,6 +23,6 @@ Create an *external* directory and copy into it the following libraries:
 
   Just download the libary
 
-  ## 2. Compilation
+## 2. Compilation
 
-  Use the CMakeList provided to generate a project. Make sure that the path to sources and libraries are correct. Compile the generated solution and run (change the working directory to your *Debug/Release* folder if necessary). An example mesh is provided in *models*.
+Use the CMakeList provided to generate a project. Make sure that the path to sources and libraries are correct. Compile the generated solution and run (change the working directory to your *Debug/Release* folder if necessary). An example mesh is provided in *models*.
