@@ -9,8 +9,8 @@
  *
  *********************************************************************************************************************/
 
-#ifndef TRIMESHSOUP_H
-#define TRIMESHSOUP_H
+#ifndef TRIMESH_H
+#define TRIMESH_H
 
 #include <map>
 #include <iostream>
@@ -39,7 +39,7 @@ class TriMesh
 
         /*!
         * \fn TriMesh
-        * \brief Default constructor of TriMeshSoup
+        * \brief Default constructor of TriMesh
         */
         TriMesh();
 
