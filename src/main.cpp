@@ -110,7 +110,7 @@ void initialize()
     m_modelMatrix = glm::mat4(1.0f);
 
     // init triangle mesh (read OBJ file)
-    m_triMesh = new TriMesh(true, false, false);
+    m_triMesh = new TriMesh();
     m_triMesh->readFile(modelDir + "teapot.obj");
     // setup mesh rendering
     m_drawMeshTeapot = new DrawableMesh;

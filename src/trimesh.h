@@ -44,16 +44,6 @@ class TriMesh
         TriMesh();
 
         /*!
-        * \fn TriMesh
-        * \brief Constructor of TriMesh with various vertex properties.
-        *        Other properties can still be requested when needed.
-        * \param _normals : true if mesh needs normals
-        * \param _texCoords2D : true if mesh needs texCoords2D
-        * \param _col : true if mesh needs colors
-        */
-        TriMesh(bool _normals, bool _texCoords2D, bool _col);
-
-        /*!
         * \fn ~TriMesh
         * \brief Destructor of TriMesh
         */

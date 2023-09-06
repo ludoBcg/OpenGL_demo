@@ -155,7 +155,7 @@ class Trackball
             glm::vec3 rotationAxis = glm::cross(m_vStart, vCurrent);
             // calculate rotation angle between init and new positions
             float dotProduct = std::max(std::min(glm::dot(m_vStart, vCurrent), 1.0f), -1.0f);
-            float rotationAngle = std::acos(dotProduct);
+            float rotationAngle = std::acos(dotProduct) * 2.0f;
 
             float eps = 0.01f;
             if (rotationAngle < eps) 

@@ -11,17 +11,10 @@
 
 
 TriMesh::TriMesh()
-{
-    m_bBoxMin = glm::vec3(0.0f, 0.0f, 0.0f);
-    m_bBoxMax = glm::vec3(0.0f, 0.0f, 0.0f);
-}
+    : m_bBoxMin(0.0f, 0.0f, 0.0f),
+      m_bBoxMax(0.0f, 0.0f, 0.0f)
+{ }
 
-
-TriMesh::TriMesh(bool _normals, bool _texCoords2D, bool _col)
-{
-    m_bBoxMin = glm::vec3(0.0f, 0.0f, 0.0f);
-    m_bBoxMax = glm::vec3(0.0f, 0.0f, 0.0f);
-}
 
 
 TriMesh::~TriMesh()
