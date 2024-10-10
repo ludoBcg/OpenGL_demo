@@ -26,7 +26,7 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
-#include "tools.h"
+#include "utils.h"
 #include "drawablemesh.h"
 
 
@@ -35,23 +35,23 @@ GLFWwindow *m_window;           /*!<  GLFW window */
 int m_winWidth = 1024;          /*!<  window width  */
 int m_winHeight = 720;          /*!<  window height  */
 
-Trackball m_trackball;          /*!<  model trackball */
+GLtools::Trackball m_trackball; /*!<  model trackball */
 
 // Scene
 glm::vec3 m_centerCoords;       /*!<  coords of the center of the scene */
 float m_radScene;               /*!< radius of the scene (i.e., diagonal of the BBox) */
 
 // Light and cameras 
-Camera m_camera;                /*!<  camera */
+GLtools::Camera m_camera;       /*!<  camera */
 float m_zoomFactor;             /*!<  zoom factor */
 glm::vec3 m_camPos;             /*!<  camera position */
 glm::vec3 m_lightPos;           /*!<  light source position  */
 glm::vec3 m_lightCol;           /*!<  light color */
 
 // 3D objects
-TriMesh* m_triMesh;             /*!<  triangle mesh */
-DrawableMesh* m_drawMeshTeapot; /*!<  drawable object: mesh object */
-DrawableMesh* m_drawMeshCube;   /*!<  drawable object: mesh object */
+std::unique_ptr<TriMesh> m_triMesh;             /*!<  triangle mesh */
+std::unique_ptr<DrawableMesh> m_drawMeshTeapot; /*!<  drawable object: mesh object */
+std::unique_ptr<DrawableMesh> m_drawMeshCube;   /*!<  drawable object: mesh object */
 
 glm::mat4 m_modelMatrix;        /*!<  model matrix of the mesh */
     
@@ -72,7 +72,7 @@ std::string modelDir = "../../models/";   /*!< relative path to meshes and textu
 // Functions definitions
 
 void initialize();
-void initScene(TriMesh *_triMesh);
+void initScene();
 void setupImgui(GLFWwindow *window);
 void update();
 void display();
@@ -110,18 +110,18 @@ void initialize()
     m_modelMatrix = glm::mat4(1.0f);
 
     // init triangle mesh (read OBJ file)
-    m_triMesh = new TriMesh();
+    m_triMesh = std::make_unique<TriMesh>();
     m_triMesh->readFile(modelDir + "teapot.obj");
     // setup mesh rendering
-    m_drawMeshTeapot = new DrawableMesh;
+    m_drawMeshTeapot = std::make_unique<DrawableMesh>();
     m_drawMeshTeapot->createMeshVAO(*m_triMesh);
 
     // init cube mesh
-    m_drawMeshCube = new DrawableMesh;
+    m_drawMeshCube = std::make_unique<DrawableMesh>();
     m_drawMeshCube->createUnitCubeVAO();
 
     // init scene depending on object geom
-    initScene(m_triMesh);
+    initScene();
 
     // init shaders
     m_program = loadShaderProgram(shaderDir + "phong.vert", shaderDir + "phong.frag");
@@ -129,7 +129,7 @@ void initialize()
 }
 
 
-void initScene(TriMesh *_triMesh)
+void initScene()
 {
     m_triMesh->computeAABB();
     glm::vec3 bBoxMin = m_triMesh->getBBoxMin();
