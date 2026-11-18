@@ -156,9 +156,9 @@ void setupImgui(GLFWwindow *window)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO &io = ImGui::GetIO();
-    (void)io;
-    // enable keyboard controls?
+    // Scale font for hdpi screen 
+    ImFontConfig cfg;
+    ImGui::GetIO().Fonts->AddFontDefault(&cfg)->Scale = 1.5f;
     ImGui::StyleColorsDark();
     // platform and renderer bindings
     ImGui_ImplGlfw_InitForOpenGL(window, true);
